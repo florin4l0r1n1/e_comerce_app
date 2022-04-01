@@ -1,4 +1,5 @@
 import 'package:e_comerce_app/presentation/screens/widgets/text_form_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -37,10 +38,12 @@ class _LogInScreenState extends State<LogInScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 'Buy or sell',
-                style:
-                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               _image(),
               _sizedBox(),
@@ -56,15 +59,36 @@ class _LogInScreenState extends State<LogInScreen> {
               _sizedBox(),
               ElevatedButton(
                 onPressed: () {},
-                child: const Text('LogIn/SignUp'),
+                style: ElevatedButton.styleFrom(
+                  elevation: 8.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  textStyle: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                child: const Text(
+                  'LogIn/SignUp',
+                ),
               ),
               ElevatedButton(
                 onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  elevation: 8.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  textStyle: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 child: const Text('Change profile'),
               ),
               TextButton(
                 onPressed: () {},
-                child: Text('Already account'),
+                child: const Text(
+                  'Already account',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),
