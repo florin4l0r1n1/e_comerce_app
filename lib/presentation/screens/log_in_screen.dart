@@ -30,67 +30,74 @@ class _LogInScreenState extends State<LogInScreen> {
 
   Widget _buildBody() {
     return Container(
+      color: Colors.orangeAccent,
       alignment: Alignment.center,
-      color: Colors.amberAccent,
       child: Padding(
         padding: const EdgeInsets.all(50.0),
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'Buy or sell',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              _image(),
-              _sizedBox(),
-              CustomTextFormField(
-                  labelText: 'Email', hintText: 'example@example.com'),
-              _sizedBox(),
-              CustomTextFormField(
-                  labelText: 'Password',
-                  hintText: 'Please enter min 8 characters'),
-              _sizedBox(),
-              CustomTextFormField(
-                  labelText: 'Password', hintText: 'Password must match'),
-              _sizedBox(),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  elevation: 8.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+          child: Card(
+            elevation: 20,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'Buy or sell',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                   ),
-                  textStyle: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                child: const Text(
-                  'LogIn/SignUp',
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  elevation: 8.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                _image(),
+                _sizedBox(),
+                CustomTextFormField(
+                    labelText: 'Email', hintText: 'example@example.com'),
+                _sizedBox(),
+                CustomTextFormField(
+                    labelText: 'Password',
+                    hintText: 'Please enter min 8 characters'),
+                _sizedBox(),
+                CustomTextFormField(
+                    labelText: 'Password', hintText: 'Password must match'),
+                _sizedBox(),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    elevation: 8.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    textStyle: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  textStyle: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
+                  child: const Text(
+                    'LogIn/SignUp',
+                  ),
                 ),
-                child: const Text('Change profile'),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'Already account',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    elevation: 8.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    textStyle: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  child: const Text('Change profile'),
                 ),
-              ),
-            ],
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'Already account',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
