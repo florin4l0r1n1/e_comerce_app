@@ -1,21 +1,17 @@
+import 'package:e_comerce_app/presentation/BloCs/form_bloc/form_bloc_validator.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
-class LogInScreen extends StatefulWidget {
+class LogInScreen extends StatelessWidget {
   const LogInScreen({Key key}) : super(key: key);
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
-}
-
-class _LogInScreenState extends State<LogInScreen> {
-  String text = "Seller";
-  bool isSeller;
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildBody());
+    final formBloc = Provider.of<FormBloc>(context);
+    return Scaffold(body: _buildBody(context, formBloc));
   }
 
   Widget _sizedBox() {
@@ -28,7 +24,7 @@ class _LogInScreenState extends State<LogInScreen> {
     return Image.asset('lib/images/comerce.png');
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context, FormBloc bloc) {
     return Container(
       color: Colors.orangeAccent,
       alignment: Alignment.center,
@@ -53,15 +49,35 @@ class _LogInScreenState extends State<LogInScreen> {
                 ),
                 _image(),
                 _sizedBox(),
-                CustomTextFormField(
-                    labelText: 'Email', hintText: 'example@example.com'),
+                StreamBuilder<Object>(
+                    stream: bloc.email,
+                    builder: (context, snapshot) {
+                      return CustomTextFormField(
+                          onChanged: bloc.changeEmail,
+                          errorText: snapshot.error,
+                          labelText: 'Email',
+                          hintText: 'example@example.com');
+                    }),
                 _sizedBox(),
-                CustomTextFormField(
-                    labelText: 'Password',
-                    hintText: 'Please enter min 8 characters'),
+                StreamBuilder<Object>(
+                    stream: bloc.password,
+                    builder: (context, snapshot) {
+                      return CustomTextFormField(
+                          onChanged: bloc.changePassword,
+                          errorText: snapshot.error,
+                          labelText: 'Password',
+                          hintText: 'Please enter min 8 characters');
+                    }),
                 _sizedBox(),
-                CustomTextFormField(
-                    labelText: 'Password', hintText: 'Password must match'),
+                StreamBuilder<Object>(
+                    stream: bloc.password,
+                    builder: (context, snapshot) {
+                      return CustomTextFormField(
+                          onChanged: bloc.changePassword,
+                          errorText: snapshot.error,
+                          labelText: 'Password',
+                          hintText: 'Password must match');
+                    }),
                 _sizedBox(),
                 ElevatedButton(
                   onPressed: () {},

@@ -38,6 +38,7 @@ dependencies:
   firebase_core: ^0.7.0
   equatable: ^1.2.6
   flutter_bloc: ^7.3.0
+  rxdart: ^0.23.1
 
 dev_dependencies:
   flutter_test:
