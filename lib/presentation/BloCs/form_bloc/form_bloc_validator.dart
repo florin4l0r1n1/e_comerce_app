@@ -3,26 +3,26 @@ import 'package:rxdart/rxdart.dart';
 
 class FormBloc {
   final _emailValidator = BehaviorSubject<String>();
-  final _password1Validator = BehaviorSubject<String>();
-  final _password2Validator = BehaviorSubject<String>();
+  final _passwordValidator = BehaviorSubject<String>();
+  final _passwordConfirmValidator = BehaviorSubject<String>();
 
   Stream<String> get email => _emailValidator.stream.transform(validateEmail);
   Stream<String> get password1 =>
-      _password1Validator.stream.transform(validatePassword1);
+      _passwordValidator.stream.transform(validatePassword1);
   Stream<String> get password2 =>
-      _password2Validator.stream.transform(validatePassword2);
+      _passwordConfirmValidator.stream.transform(validatePassword2);
 
   Stream<bool> get formValid => Rx.combineLatest3(
       email, password1, password2, (email, password1, password2) => true);
 
   Function(String) get changeEmail => _emailValidator.sink.add;
-  Function(String) get changePassword1 => _password1Validator.sink.add;
-  Function(String) get changePassword2 => _password2Validator.sink.add;
+  Function(String) get changePassword1 => _passwordValidator.sink.add;
+  Function(String) get changePassword2 => _passwordConfirmValidator.sink.add;
 
   dispose() {
     _emailValidator.close();
-    _password1Validator.close();
-    _password2Validator.close();
+    _passwordValidator.close();
+    _passwordConfirmValidator.close();
   }
 
   final validateEmail =
@@ -55,6 +55,6 @@ class FormBloc {
 
   registerUser() {
     print(
-        "user submitted ${_password1Validator.value} and ${_password2Validator.value} and ${_emailValidator.value} ");
+        "user submitted ");
   }
 }
