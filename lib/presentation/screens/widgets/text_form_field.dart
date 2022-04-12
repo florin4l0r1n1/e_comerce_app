@@ -19,7 +19,7 @@ class CustomTextFormField extends StatelessWidget {
       color: Colors.white,
       child: TextFormField(
           onChanged: onChanged,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.black),
           decoration: InputDecoration(
             errorText: errorText,
             fillColor: Colors.green,
