@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 @immutable
 class CustomTextFormField extends StatelessWidget {
+  Function validator;
   Function onChanged;
   String errorText;
   String labelText;
   String hintText;
   CustomTextFormField({
     Key key,
-    @required this.errorText,
-    @required this.onChanged,
+    this.validator,
+    this.errorText,
+    this.onChanged,
     @required this.labelText,
     @required this.hintText,
   }) : super(key: key);
@@ -18,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
     return Card(
       color: Colors.white,
       child: TextFormField(
+            validator: validator,
           onChanged: onChanged,
           style: const TextStyle(color: Colors.black),
           decoration: InputDecoration(
