@@ -1,13 +1,21 @@
-import 'package:e_comerce_app/presentation/screens/widgets/text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
+import 'package:e_comerce_app/presentation/screens/widgets/text_form_field.dart';
 import 'input_validation_mixin.dart';
 
 class FormPage extends StatelessWidget with InputValidationMixin {
   final _formKey = GlobalKey<FormState>();
+  String e;
   String p1;
   String p2;
 
-  FormPage({Key key, this.p1, this.p2}) : super(key: key);
+  FormPage({
+    Key key,
+     this.e,
+     this.p1,
+     this.p2,
+  }) : super(key: key);
 
   Widget _sizedBox() {
     return const SizedBox(
@@ -17,6 +25,12 @@ class FormPage extends StatelessWidget with InputValidationMixin {
 
   Widget _image() {
     return Image.asset('lib/images/comerce.png');
+  }
+
+  void _signUpWithEmailAndPassword(BuildContext context) {
+    if (_formKey.currentState.validate()) {
+      BlocProvider.of<AuthBloc>(context).add(SignUpRequested(e, p2));
+    }
   }
 
   @override
@@ -47,24 +61,10 @@ class FormPage extends StatelessWidget with InputValidationMixin {
                   ),
                   _image(),
                   _sizedBox(),
-                  /*  TextFormField(
-                      validator: (email) {
-                        if (isEmailValid(email)) {
-                          return null;
-                        }
-                        return "Please entre a valid email";
-                      },
-                      style: const TextStyle(color: Colors.black),
-                      decoration: const InputDecoration(
-                        fillColor: Colors.green,
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                      )),*/
-
                   CustomTextFormField(
                     validator: (email) {
                       if (isEmailValid(email)) {
+                        e = email;
                         return null;
                       } else {
                         return "Please enter a valid email address";
@@ -107,6 +107,7 @@ class FormPage extends StatelessWidget with InputValidationMixin {
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         _formKey.currentState.save();
+                        _signUpWithEmailAndPassword(context);
                       }
                     },
                     style: ElevatedButton.styleFrom(
