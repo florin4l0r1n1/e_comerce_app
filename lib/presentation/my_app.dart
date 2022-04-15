@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return RepositoryProvider(
       create: (context) => AuthRepository(),
       child: BlocProvider(
-        create: (context) => AuthBloc(
+       create:  (context) => AuthBloc(
           authRepository: RepositoryProvider.of<AuthRepository>(context),
         ),
         child: MaterialApp(

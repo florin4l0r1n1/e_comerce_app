@@ -1,3 +1,4 @@
+import 'package:e_comerce_app/presentation/BloCs/profile_bloc/bloc/profile_bloc_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
@@ -37,6 +38,20 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
     }
   }
 
+  Widget _buildMainText() {
+    return BlocBuilder<ProfileBloc, String>(
+      builder: (context, state) {
+        return Text(
+          state,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,13 +71,7 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    primaryText = profile == Profile.buyer ? "Buy" : "Sell",
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  _buildMainText(),
                   _image(),
                   _sizedBox(),
                   CustomTextFormField(
@@ -123,17 +132,13 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
                       textStyle: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    child: Text(
-                      secondaryText =
-                          profile == Profile.signIn ? "LogIn" : "Register",
+                    child: const Text(
+                      "Register",
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      profile == Profile.seller
-                          ? Profile.buyer
-                          : Profile.seller;
-                      print(primaryText);
+                      //Show buy or Sell Text
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 8.0,
@@ -146,9 +151,10 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
                     child: const Text('Change profile'),
                   ),
                   TextButton(
-                    onPressed: () => profile == Profile.signIn
-                        ? Profile.signUp
-                        : Profile.signIn,
+                    onPressed: () {
+                      context.read<ProfileBloc>().add(SignInStatusRequested());
+                      //Show SignInText
+                    },
                     child: const Text(
                       'Already an account',
                       style:
