@@ -1,21 +1,26 @@
+import 'package:e_comerce_app/presentation/BloCs/profile_bloc/bloc/profile_bloc_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/text_form_field.dart';
 import 'input_validation_mixin.dart';
 
-class FormPage extends StatelessWidget with InputValidationMixin {
-  final _formKey = GlobalKey<FormState>();
-  String e;
-  String p1;
-  String p2;
+enum Profile { signIn, signUp, seller, buyer }
 
-  FormPage({
-    Key key,
-     this.e,
-     this.p1,
-     this.p2,
-  }) : super(key: key);
+// ignore: must_be_immutable
+class SignUpFormPage extends StatelessWidget with InputValidationMixin {
+  final Profile profile;
+  String email;
+  String password1;
+  String password2;
+
+  SignUpFormPage(
+      {Key key, this.email, this.password1, this.password2, this.profile})
+      : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
+  String primaryText;
+  String secondaryText;
 
   Widget _sizedBox() {
     return const SizedBox(
@@ -29,8 +34,22 @@ class FormPage extends StatelessWidget with InputValidationMixin {
 
   void _signUpWithEmailAndPassword(BuildContext context) {
     if (_formKey.currentState.validate()) {
-      BlocProvider.of<AuthBloc>(context).add(SignUpRequested(e, p2));
+      BlocProvider.of<AuthBloc>(context).add(SignUpRequested(email, password2));
     }
+  }
+
+  Widget _buildMainText() {
+    return BlocBuilder<ProfileBloc, String>(
+      builder: (context, state) {
+        return Text(
+          state,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -52,19 +71,13 @@ class FormPage extends StatelessWidget with InputValidationMixin {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text(
-                    'Buy or sell',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  _buildMainText(),
                   _image(),
                   _sizedBox(),
                   CustomTextFormField(
                     validator: (email) {
                       if (isEmailValid(email)) {
-                        e = email;
+                        email = email;
                         return null;
                       } else {
                         return "Please enter a valid email address";
@@ -75,9 +88,9 @@ class FormPage extends StatelessWidget with InputValidationMixin {
                   ),
                   _sizedBox(),
                   CustomTextFormField(
-                    validator: (pass1) {
-                      p1 = pass1;
-                      if (isPassword1Valid(pass1)) {
+                    validator: (password1) {
+                      password1 = password1;
+                      if (isPassword1Valid(password1)) {
                         return null;
                       } else {
                         return "Please enter a valid password";
@@ -88,13 +101,14 @@ class FormPage extends StatelessWidget with InputValidationMixin {
                   ),
                   _sizedBox(),
                   CustomTextFormField(
-                    validator: (pass2) {
-                      p2 = pass2;
-                      if (isPassword2Valid(pass2)) {
+                    validator: (password2) {
+                      password2 = password2;
+                      if (isPassword2Valid(password2)) {
                         return null;
                       }
-                      if (isPassword1Valid(p1) != (isPassword2Valid(pass2))) {
-                        return "Passwords doesen t match";
+                      if (isPassword1Valid(password1) !=
+                          (isPassword2Valid(password2))) {
+                        return "Password don t match";
                       } else {
                         return "Please repeat password";
                       }
@@ -119,11 +133,13 @@ class FormPage extends StatelessWidget with InputValidationMixin {
                           fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     child: const Text(
-                      'LogIn/SignUp',
+                      "Register",
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      //Show buy or Sell Text
+                    },
                     style: ElevatedButton.styleFrom(
                       elevation: 8.0,
                       shape: RoundedRectangleBorder(
@@ -135,9 +151,12 @@ class FormPage extends StatelessWidget with InputValidationMixin {
                     child: const Text('Change profile'),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<ProfileBloc>().add(SignInStatusRequested());
+                      //Show SignInText
+                    },
                     child: const Text(
-                      'Already account',
+                      'Already an account',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
