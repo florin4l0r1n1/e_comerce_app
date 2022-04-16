@@ -1,59 +1,36 @@
-import 'package:e_comerce_app/presentation/BloCs/profile_bloc/bloc/profile_bloc_bloc.dart';
+import 'package:e_comerce_app/presentation/screens/widgets/utils/elevated_auth_button.dart';
+import 'package:e_comerce_app/presentation/screens/widgets/utils/profile_text.dart';
+import 'package:e_comerce_app/presentation/screens/widgets/utils/sized_box.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
-import 'package:e_comerce_app/presentation/screens/widgets/text_form_field.dart';
+import 'package:e_comerce_app/presentation/screens/widgets/utils/text_form_field.dart';
 import 'input_validation_mixin.dart';
 
-enum Profile { signIn, signUp, seller, buyer }
-
-// ignore: must_be_immutable
 class SignUpFormPage extends StatelessWidget with InputValidationMixin {
-  final Profile profile;
   String email;
   String password1;
   String password2;
 
-  SignUpFormPage(
-      {Key key, this.email, this.password1, this.password2, this.profile})
+  SignUpFormPage({Key key, this.email, this.password1, this.password2})
       : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
+
   String primaryText;
+
   String secondaryText;
-
-  Widget _sizedBox() {
-    return const SizedBox(
-      height: 10,
-    );
-  }
-
-  Widget _image() {
-    return Image.asset('lib/images/comerce.png');
-  }
 
   void _signUpWithEmailAndPassword(BuildContext context) {
     if (_formKey.currentState.validate()) {
-      BlocProvider.of<AuthBloc>(context).add(SignUpRequested(email, password2));
+      // BlocProvider.of<AuthBloc>(context).add(SignUpRequested(email,password2));
     }
-  }
-
-  Widget _buildMainText() {
-    return BlocBuilder<ProfileBloc, String>(
-      builder: (context, state) {
-        return Text(
-          state,
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        );
-      },
-    );
   }
 
   @override
   Widget build(BuildContext context) {
+    return _buildBody(context);
+  }
+
+  Widget _buildBody(BuildContext context) {
     return Container(
       color: Colors.orangeAccent,
       alignment: Alignment.center,
@@ -71,9 +48,8 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  _buildMainText(),
-                  _image(),
-                  _sizedBox(),
+                  ProfileText(text: "Sell/Buy"),
+                  sizedBox(),
                   CustomTextFormField(
                     validator: (email) {
                       if (isEmailValid(email)) {
@@ -86,7 +62,7 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
                     labelText: 'Email',
                     hintText: 'example@example.com',
                   ),
-                  _sizedBox(),
+                  sizedBox(),
                   CustomTextFormField(
                     validator: (password1) {
                       password1 = password1;
@@ -99,7 +75,7 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
                     labelText: 'Password',
                     hintText: 'Please enter min 8 characters',
                   ),
-                  _sizedBox(),
+                  sizedBox(),
                   CustomTextFormField(
                     validator: (password2) {
                       password2 = password2;
@@ -116,51 +92,17 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
                     labelText: 'Password',
                     hintText: 'Password must match',
                   ),
-                  _sizedBox(),
-                  ElevatedButton(
+                  sizedBox(),
+                  AuthButton(
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         _formKey.currentState.save();
                         _signUpWithEmailAndPassword(context);
                       }
                     },
-                    style: ElevatedButton.styleFrom(
-                      elevation: 8.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      textStyle: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    child: const Text(
-                      "Register",
-                    ),
+                    text: "Register",
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      //Show buy or Sell Text
-                    },
-                    style: ElevatedButton.styleFrom(
-                      elevation: 8.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      textStyle: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    child: const Text('Change profile'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.read<ProfileBloc>().add(SignInStatusRequested());
-                      //Show SignInText
-                    },
-                    child: const Text(
-                      'Already an account',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  AuthButton(onPressed: () {}, text: "Change Profile"),
                 ],
               ),
             ),

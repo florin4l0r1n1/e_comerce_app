@@ -1,7 +1,10 @@
 import 'package:e_comerce_app/data/repository/repository.dart';
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
+import 'package:e_comerce_app/presentation/screens/auth/dash_board.dart';
 
-import 'package:e_comerce_app/presentation/screens/log_in_screen.dart';
+import 'package:e_comerce_app/presentation/screens/auth/log_in_screen.dart';
+import 'package:e_comerce_app/presentation/screens/auth/register_screen.dart';
+import 'package:e_comerce_app/presentation/screens/widgets/auth/sign_in_form_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,16 +16,20 @@ class MyApp extends StatelessWidget {
     return RepositoryProvider(
       create: (context) => AuthRepository(),
       child: BlocProvider(
-       create:  (context) => AuthBloc(
+        create: (context) => AuthBloc(
           authRepository: RepositoryProvider.of<AuthRepository>(context),
         ),
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
+            routes: {
+              '/signInScreen': (context) => SignInFormPage(),
+              '/registerScreen': (context) => RegisterScreen(),
+            },
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const LogInScreen()),
+            home: const DashBoardScreen()),
       ),
     );
   }

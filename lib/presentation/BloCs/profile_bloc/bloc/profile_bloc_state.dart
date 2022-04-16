@@ -1,46 +1,19 @@
 part of 'profile_bloc_bloc.dart';
 
-abstract class ProfileBlocState extends Equatable {
-  
-}
+abstract class ProfileBlocState extends Equatable {}
 
-class ProfileBlocSeller extends ProfileBlocState {
-  final String status;
-
-  ProfileBlocSeller(this.status);
-
+class ProfileInitial extends ProfileBlocState {
   @override
   
-  List<Object> get props => null;
+  List<Object> get props => [];
 }
 
-class ProfileBlocBuyer extends ProfileBlocState {
+class ProfileLoaded extends ProfileBlocState {
   final String status;
 
-  ProfileBlocBuyer(this.status);
+  ProfileLoaded(this.status);
 
   @override
-  
-  List<Object> get props => null;
-}
-
-class ProfileBlocIsRegisterd extends ProfileBlocState {
-  final String status;
-
-  ProfileBlocIsRegisterd(this.status);
-
-
-  @override
-  
-  List<Object> get props => null;
-}
-
-class ProfileBlocIsNotRegisterd extends ProfileBlocState {
-  final String status;
-
-  ProfileBlocIsNotRegisterd(this.status);
-
-  @override
-  
-  List<Object> get props => null;
+ 
+  List<Object> get props => [status];
 }
