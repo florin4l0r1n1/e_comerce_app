@@ -23,6 +23,10 @@ class Authenticated extends AuthState {
   @override
   List<Object> get props => [];
 }
+class Registerd extends AuthState {
+   @override
+  List<Object> get props => [];
+}
 
 class AuthError extends AuthState {
   final String error;

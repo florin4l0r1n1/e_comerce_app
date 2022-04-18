@@ -1,8 +1,10 @@
+import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/elevated_auth_button.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/profile_text.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/sized_box.dart';
 import 'package:flutter/material.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/text_form_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'input_validation_mixin.dart';
 
 class SignUpFormPage extends StatefulWidget {
@@ -17,12 +19,14 @@ class _SignUpFormPageState extends State<SignUpFormPage>
   final _formKey = GlobalKey<FormState>();
   String title = "Seller";
   bool isSeller = false;
+  String email1;
   String password1;
   String password2;
 
   void _signUpWithEmailAndPassword(BuildContext context) {
     if (_formKey.currentState.validate()) {
-      // BlocProvider.of<AuthBloc>(context).add(SignUpRequested(email,password2));
+      BlocProvider.of<AuthBloc>(context)
+          .add(SignUpRequested(email1, password2));
     }
   }
 
@@ -67,6 +71,7 @@ class _SignUpFormPageState extends State<SignUpFormPage>
                   sizedBox(),
                   CustomTextFormField(
                     validator: (email) {
+                      email1 = email;
                       if (isEmailValid(email)) {
                         return null;
                       } else {

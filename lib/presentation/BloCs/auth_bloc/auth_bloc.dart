@@ -26,7 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(Loading());
       try {
         await authRepository.registerUser(event.email, event.password);
-        emit(Authenticated());
+        emit(Registerd());
       } catch (e) {
         emit(AuthError(error: e.toString()));
         emit(Unauthenticated());

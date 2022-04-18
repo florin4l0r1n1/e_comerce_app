@@ -1,9 +1,10 @@
 import 'package:e_comerce_app/data/repository/repository.dart';
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
-import 'package:e_comerce_app/presentation/screens/auth/dash_board.dart';
+import 'package:e_comerce_app/presentation/screens/auth/auth_screen.dart';
 
 import 'package:e_comerce_app/presentation/screens/auth/log_in_screen.dart';
 import 'package:e_comerce_app/presentation/screens/auth/register_screen.dart';
+import 'package:e_comerce_app/presentation/screens/dash_board.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/auth/sign_in_form_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,11 +26,12 @@ class MyApp extends StatelessWidget {
             routes: {
               '/signInScreen': (context) => SignInFormPage(),
               '/registerScreen': (context) => RegisterScreen(),
+              '/dashBoard' : (context) => DashBoard()
             },
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const DashBoardScreen()),
+            home: const AuthScreen()),
       ),
     );
   }
