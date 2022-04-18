@@ -5,24 +5,37 @@ import 'package:flutter/material.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/text_form_field.dart';
 import 'input_validation_mixin.dart';
 
-class SignUpFormPage extends StatelessWidget with InputValidationMixin {
-  String email;
+class SignUpFormPage extends StatefulWidget {
+  SignUpFormPage({Key key}) : super(key: key);
+
+  @override
+  State<SignUpFormPage> createState() => _SignUpFormPageState();
+}
+
+class _SignUpFormPageState extends State<SignUpFormPage>
+    with InputValidationMixin {
+  final _formKey = GlobalKey<FormState>();
+  String title = "Seller";
+  bool isSeller = false;
   String password1;
   String password2;
-
-  SignUpFormPage({Key key, this.email, this.password1, this.password2})
-      : super(key: key);
-
-  final _formKey = GlobalKey<FormState>();
-
-  String primaryText;
-
-  String secondaryText;
 
   void _signUpWithEmailAndPassword(BuildContext context) {
     if (_formKey.currentState.validate()) {
       // BlocProvider.of<AuthBloc>(context).add(SignUpRequested(email,password2));
     }
+  }
+
+  void _update() {
+    setState(() {
+      if (title == "Seller") {
+        isSeller = false;
+        title = "Buyer";
+      } else {
+        isSeller = true;
+        title = "Seller";
+      }
+    });
   }
 
   @override
@@ -48,12 +61,13 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  ProfileText(text: "Sell/Buy"),
+                  ProfileText(
+                    title: title,
+                  ),
                   sizedBox(),
                   CustomTextFormField(
                     validator: (email) {
                       if (isEmailValid(email)) {
-                        email = email;
                         return null;
                       } else {
                         return "Please enter a valid email address";
@@ -64,8 +78,8 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
                   ),
                   sizedBox(),
                   CustomTextFormField(
-                    validator: (password1) {
-                      password1 = password1;
+                    validator: (password) {
+                      password1 = password;
                       if (isPassword1Valid(password1)) {
                         return null;
                       } else {
@@ -77,8 +91,8 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
                   ),
                   sizedBox(),
                   CustomTextFormField(
-                    validator: (password2) {
-                      password2 = password2;
+                    validator: (password) {
+                      password2 = password;
                       if (isPassword2Valid(password2)) {
                         return null;
                       }
@@ -102,7 +116,8 @@ class SignUpFormPage extends StatelessWidget with InputValidationMixin {
                     },
                     text: "Register",
                   ),
-                  AuthButton(onPressed: () {}, text: "Change Profile"),
+                  AuthButton(
+                      onPressed: () => _update(), text: "Change Profile"),
                 ],
               ),
             ),

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-
 class ProfileText extends StatelessWidget {
-  String text;
+  String title;
   ProfileText({
     Key key,
-    this.text,
+    this.title,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      title,
       style: const TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.bold,
