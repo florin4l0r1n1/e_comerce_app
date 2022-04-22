@@ -24,6 +24,7 @@ class Authenticated extends AuthState {
   List<Object> get props => [];
 }
 
+
 class AuthError extends AuthState {
   final String error;
 
