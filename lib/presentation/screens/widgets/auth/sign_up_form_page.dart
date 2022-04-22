@@ -24,10 +24,7 @@ class _SignUpFormPageState extends State<SignUpFormPage>
   String password2;
 
   void _signUpWithEmailAndPassword(BuildContext context) {
-    if (_formKey.currentState.validate()) {
-      BlocProvider.of<AuthBloc>(context)
-          .add(SignUpRequested(email1, password2));
-    }
+    BlocProvider.of<AuthBloc>(context).add(SignUpRequested(email1, password2));
   }
 
   void _update() {

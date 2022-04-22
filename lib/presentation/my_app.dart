@@ -1,8 +1,6 @@
 import 'package:e_comerce_app/data/repository/repository.dart';
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
 import 'package:e_comerce_app/presentation/screens/auth/auth_screen.dart';
-
-import 'package:e_comerce_app/presentation/screens/auth/log_in_screen.dart';
 import 'package:e_comerce_app/presentation/screens/auth/register_screen.dart';
 import 'package:e_comerce_app/presentation/screens/dash_board.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/auth/sign_in_form_page.dart';
@@ -25,8 +23,8 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             routes: {
               '/signInScreen': (context) => SignInFormPage(),
-              '/registerScreen': (context) => RegisterScreen(),
-              '/dashBoard' : (context) => DashBoard()
+              '/registerScreen': (context) =>const  RegisterScreen(),
+              '/dashBoard' : (context) =>const DashBoard(),
             },
             theme: ThemeData(
               primarySwatch: Colors.blue,
