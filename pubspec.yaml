@@ -39,6 +39,8 @@ dependencies:
   equatable: ^1.2.6
   flutter_bloc: ^7.3.0
   rxdart: ^0.23.1
+  circular_reveal_animation: ^2.0.0
+  persistent_bottom_nav_bar: ^4.0.2
 
 dev_dependencies:
   flutter_test:
