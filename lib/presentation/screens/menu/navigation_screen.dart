@@ -1,88 +1,107 @@
-import 'package:circular_reveal_animation/circular_reveal_animation.dart';
+import 'package:e_comerce_app/presentation/screens/menu/add_item_screen.dart';
+import 'package:e_comerce_app/presentation/screens/menu/cart_screen.dart';
+import 'package:e_comerce_app/presentation/screens/menu/favorite_screen.dart';
+import 'package:e_comerce_app/presentation/screens/menu/home_screen.dart';
+import 'package:e_comerce_app/presentation/screens/menu/profile_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
 class NavigationScreen extends StatefulWidget {
-  final IconData iconData;
-
-  NavigationScreen(this.iconData) : super();
+  const NavigationScreen({Key key}) : super(key: key);
 
   @override
-  _NavigationScreenState createState() => _NavigationScreenState();
+  State<NavigationScreen> createState() => _DashBoardState();
 }
-class _NavigationScreenState extends State<NavigationScreen>
-    with TickerProviderStateMixin {
-      AnimationController _controller;
-      Animation<double> animation;
 
-  @override
-  void didUpdateWidget(NavigationScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.iconData != widget.iconData) {
-      _startAnimation();
-    }
-  }
+class _DashBoardState extends State<NavigationScreen> {
+  PersistentTabController _controller;
 
   @override
   void initState() {
-    _controller = AnimationController(
-      vsync: this,
-      duration:const Duration(milliseconds: 1000),
-    );
-    animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeIn,
-    );
-    _controller.forward();
     super.initState();
-  }
-
-  _startAnimation() {
-    _controller = AnimationController(
-      vsync: this,
-      duration:const Duration(milliseconds: 1000),
-    );
-    animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeIn,
-    );
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+    _controller = PersistentTabController(initialIndex: 0);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: Colors.white,
-      child: Center(
-        child: CircularRevealAnimation(
-          animation: animation,
-          centerOffset: Offset(80, 80),
-          maxRadius: MediaQuery.of(context).size.longestSide * 1.1,
-          child: Icon(
-            widget.iconData,
-            color: HexColor('#FFA400'),
-            size: 160,
-          ),
-        ),
+    return PersistentTabView(
+      context,
+      controller: _controller,
+      screens: _buildScreens(),
+      items: _navBarsItems(),
+      confineInSafeArea: true,
+      backgroundColor: Colors.black, // Default is Colors.white.
+      handleAndroidBackButtonPress: true, // Default is true.
+      resizeToAvoidBottomInset:
+          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true, // Default is true.
+      hideNavigationBarWhenKeyboardShows:
+          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: Colors.white,
       ),
+      popAllScreensOnTapOfSelectedTab: true,
+      popActionScreens: PopActionScreensType.all,
+      itemAnimationProperties: const ItemAnimationProperties(
+        // Navigation Bar's items animation properties.
+        duration: Duration(milliseconds: 200),
+        curve: Curves.ease,
+      ),
+      screenTransitionAnimation: const ScreenTransitionAnimation(
+        // Screen transition animation on change of selected tab.
+        animateTabTransition: true,
+        curve: Curves.ease,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarStyle:
+          NavBarStyle.style15, // Choose the nav bar style with this property.
     );
   }
-}
 
-class HexColor extends Color {
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.home_max_outlined),
+        title: ("Home"),
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.preview),
+        title: ("Cart"),
+        activeColorPrimary: Colors.black,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.add_box_rounded),
+        title: ("Add"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.favorite_border_outlined),
+        title: ("Favorite"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.portrait_outlined),
+        title: ("Profile"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+    ];
+  }
 
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll('#', '');
-    if (hexColor.length == 6) {
-      hexColor = 'FF' + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
+  List<Widget> _buildScreens() {
+    return [
+      const HomeScreen(),
+      const CartScreen(),
+      const AddItem(),
+      const FavoriteScreen(),
+      const ProfileScreen(),
+    ];
   }
 }

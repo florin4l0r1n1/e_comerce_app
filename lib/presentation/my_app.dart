@@ -5,6 +5,7 @@ import 'package:e_comerce_app/presentation/screens/auth/register_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/cart_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/home_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/favorite_screen.dart';
+import 'package:e_comerce_app/presentation/screens/menu/navigation_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/profile_screen.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/auth/sign_in_form_page.dart';
 import 'package:flutter/material.dart';
@@ -26,15 +27,15 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             routes: {
               '/signInScreen': (context) => SignInFormPage(),
-              '/registerScreen': (context) =>const  RegisterScreen(),
-              '/dashBoard' : (context) =>const HomeScreen(),
-              '/favoriteScreen' :(context) => const FavoriteScreen(),
-              '/profileScreen' :(context) => const ProfileScreen(),
-              '/cartScreen' : (context) => const CartScreen(),
-
+              '/registerScreen': (context) => const RegisterScreen(),
+              '/dashBoard': (context) => const NavigationScreen(),
+              '/favoriteScreen': (context) => const FavoriteScreen(),
+              '/profileScreen': (context) => const ProfileScreen(),
+              '/cartScreen': (context) => const CartScreen(),
             },
             theme: ThemeData(
-              primarySwatch: Colors.blue,
+              primaryColor: Colors.red,
+              primarySwatch: Colors.orangeAccent[0xfffdb911a],
             ),
             home: const AuthScreen()),
       ),

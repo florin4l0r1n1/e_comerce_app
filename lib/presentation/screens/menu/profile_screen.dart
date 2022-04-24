@@ -6,6 +6,12 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text("Profile"),);
+    return Scaffold(
+      body: Center(
+        child: Container(
+          child: Text("Profile"),
+        ),
+      ),
+    );
   }
 }
