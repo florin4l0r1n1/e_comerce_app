@@ -31,7 +31,8 @@ class _DashBoardState extends State<NavigationScreen> {
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
-      backgroundColor: Colors.black, // Default is Colors.white.
+      backgroundColor:
+          Theme.of(context).colorScheme.onSurface, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset:
           true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
@@ -47,7 +48,7 @@ class _DashBoardState extends State<NavigationScreen> {
       itemAnimationProperties: const ItemAnimationProperties(
         // Navigation Bar's items animation properties.
         duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
+        curve: Curves.decelerate,
       ),
       screenTransitionAnimation: const ScreenTransitionAnimation(
         // Screen transition animation on change of selected tab.
@@ -56,7 +57,7 @@ class _DashBoardState extends State<NavigationScreen> {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle:
-          NavBarStyle.style15, // Choose the nav bar style with this property.
+          NavBarStyle.style3, // Choose the nav bar style with this property.
     );
   }
 
@@ -66,31 +67,31 @@ class _DashBoardState extends State<NavigationScreen> {
         icon: const Icon(Icons.home_max_outlined),
         title: ("Home"),
         activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        inactiveColorPrimary: Theme.of(context).colorScheme.onPrimary,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.preview),
         title: ("Cart"),
-        activeColorPrimary: Colors.black,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
+        inactiveColorPrimary: Theme.of(context).colorScheme.onPrimary,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.add_box_rounded),
         title: ("Add"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
+        inactiveColorPrimary: Theme.of(context).colorScheme.onPrimary,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.favorite_border_outlined),
         title: ("Favorite"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
+        inactiveColorPrimary: Theme.of(context).colorScheme.onPrimary,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.portrait_outlined),
         title: ("Profile"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: Theme.of(context).colorScheme.primary,
+        inactiveColorPrimary: Theme.of(context).colorScheme.onPrimary,
       ),
     ];
   }
