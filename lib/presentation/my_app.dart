@@ -3,8 +3,8 @@ import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
 import 'package:e_comerce_app/presentation/screens/auth/auth_screen.dart';
 import 'package:e_comerce_app/presentation/screens/auth/register_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/cart_screen.dart';
-import 'package:e_comerce_app/presentation/screens/menu/home_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/favorite_screen.dart';
+import 'package:e_comerce_app/presentation/screens/menu/navigation_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/profile_screen.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/auth/sign_in_form_page.dart';
 import 'package:flutter/material.dart';
@@ -26,15 +26,27 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             routes: {
               '/signInScreen': (context) => SignInFormPage(),
-              '/registerScreen': (context) =>const  RegisterScreen(),
-              '/dashBoard' : (context) =>const HomeScreen(),
-              '/favoriteScreen' :(context) => const FavoriteScreen(),
-              '/profileScreen' :(context) => const ProfileScreen(),
-              '/cartScreen' : (context) => const CartScreen(),
-
+              '/registerScreen': (context) => const RegisterScreen(),
+              '/dashBoard': (context) => const NavigationScreen(),
+              '/favoriteScreen': (context) => const FavoriteScreen(),
+              '/profileScreen': (context) => const ProfileScreen(),
+              '/cartScreen': (context) => const CartScreen(),
             },
             theme: ThemeData(
-              primarySwatch: Colors.blue,
+              colorScheme: const ColorScheme(
+                  primary: Colors.orangeAccent,
+                  primaryVariant: Colors.deepOrange,
+                  secondary: Colors.green,
+                  secondaryVariant: Colors.orangeAccent,
+                  surface: Colors.yellow,
+                  background: Colors.brown,
+                  error: Colors.red,
+                  onPrimary: Colors.grey,
+                  onSecondary: Colors.black12,
+                  onSurface: Colors.black,
+                  onBackground: Colors.black,
+                  onError: Colors.white,
+                  brightness: Brightness.light),
             ),
             home: const AuthScreen()),
       ),

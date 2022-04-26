@@ -45,7 +45,7 @@ class _SignInFormPageState extends State<SignInFormPage>
 
   Widget _buildBody(BuildContext context) {
     return Container(
-      color: Colors.orangeAccent,
+      color: Theme.of(context).colorScheme.primary,
       alignment: Alignment.center,
       child: Padding(
         padding: const EdgeInsets.all(50.0),

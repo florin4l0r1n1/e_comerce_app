@@ -5,8 +5,12 @@ class AddItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Add Item'),
+    return Scaffold(
+      body: Center(
+        child: Container(
+          child: Text("Add"),
+        ),
+      ),
     );
   }
 }

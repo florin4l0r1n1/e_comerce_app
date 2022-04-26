@@ -4,6 +4,12 @@ class FavoriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text("Favorite"),);
+     return Scaffold(
+      body: Center(
+        child: Container(
+          child: Text("Favorite"),
+        ),
+      ),
+    );
   }
 }
