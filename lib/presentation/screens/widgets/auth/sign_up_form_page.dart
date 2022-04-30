@@ -120,6 +120,14 @@ class _SignUpFormPageState extends State<SignUpFormPage>
                   ),
                   AuthButton(
                       onPressed: () => _update(), text: "Change Profile"),
+                  sizedBox(),
+                  TextButton(
+                    onPressed: () {
+                      print("register");
+                      Navigator.pushReplacementNamed(context, '/signInScreen');
+                    },
+                    child: const Text("Already an account"),
+                  )
                 ],
               ),
             ),

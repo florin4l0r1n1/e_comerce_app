@@ -1,14 +1,19 @@
+import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:e_comerce_app/presentation/screens/menu/add_item_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/cart_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/favorite_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/home_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/profile_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({Key key}) : super(key: key);
+  
+  NavigationScreen({
+    Key key,
+  }) : super(key: key);
 
   @override
   State<NavigationScreen> createState() => _DashBoardState();
@@ -16,16 +21,39 @@ class NavigationScreen extends StatefulWidget {
 
 class _DashBoardState extends State<NavigationScreen> {
   PersistentTabController _controller;
+  
 
   @override
   void initState() {
     super.initState();
+
     _controller = PersistentTabController(initialIndex: 0);
   }
 
   @override
   Widget build(BuildContext context) {
+
+
+    return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
+      if (state is Loading) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      } else if (state is Unauthenticated) {
+        Future.delayed(Duration.zero, () {
+          Navigator.pushReplacementNamed(context, '/authScreen');
+        });
+      } else if (state is AuthError) {
+        return Text(state.error);
+      }
+      return _buildBody(context);
+    });
+    
+  }
+
+  Widget _buildBody(BuildContext context) {
     return PersistentTabView(
+      
       context,
       controller: _controller,
       screens: _buildScreens(),
@@ -98,11 +126,13 @@ class _DashBoardState extends State<NavigationScreen> {
 
   List<Widget> _buildScreens() {
     return [
-      const HomeScreen(),
+      HomeScreen(),
       const CartScreen(),
       const AddItem(),
       const FavoriteScreen(),
       const ProfileScreen(),
     ];
   }
+
+ 
 }
