@@ -103,7 +103,14 @@ class _SignInFormPageState extends State<SignInFormPage>
                   AuthButton(
                     onPressed: () => _update(),
                     text: "Change Profile",
-                  )
+                  ),
+                  sizedBox(),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                            context, '/registerScreen');
+                      },
+                      child: const Text('Register'))
                 ],
               ),
             ),
