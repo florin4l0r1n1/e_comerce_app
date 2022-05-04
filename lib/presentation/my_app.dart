@@ -1,4 +1,4 @@
-import 'package:e_comerce_app/data/repository/repository.dart';
+import 'package:e_comerce_app/data/repository/auth_repository.dart';
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
 import 'package:e_comerce_app/presentation/screens/auth/auth_screen.dart';
 import 'package:e_comerce_app/presentation/screens/auth/register_screen.dart';
