@@ -1,7 +1,6 @@
 import 'package:e_comerce_app/data/repository/repository.dart';
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
 import 'package:e_comerce_app/presentation/screens/auth/auth_screen.dart';
-
 import 'package:e_comerce_app/presentation/screens/auth/register_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/cart_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/favorite_screen.dart';
@@ -25,26 +24,25 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
-            routes:<String, WidgetBuilder> {
+            routes: <String, WidgetBuilder>{
               '/authScreen': (context) => const AuthScreen(),
               '/signInScreen': (context) => SignInFormPage(),
               '/registerScreen': (context) => const RegisterScreen(),
-              '/dashBoard': (context) =>  NavigationScreen(),
+              '/dashBoard': (context) => NavigationScreen(),
               '/favoriteScreen': (context) => const FavoriteScreen(),
               '/profileScreen': (context) => const ProfileScreen(),
               '/cartScreen': (context) => const CartScreen(),
-            
             },
             theme: ThemeData(
               colorScheme: const ColorScheme(
-                  primary: Colors.orangeAccent,
-                  primaryVariant: Colors.deepOrange,
-                  secondary: Colors.green,
-                  secondaryVariant: Colors.orangeAccent,
+                  primary: Colors.white,
+                  primaryVariant: Colors.white,
+                  secondary: Colors.black,
+                  secondaryVariant: Colors.black,
                   surface: Colors.yellow,
                   background: Colors.brown,
                   error: Colors.red,
-                  onPrimary: Colors.grey,
+                  onPrimary: Colors.black,
                   onSecondary: Colors.black12,
                   onSurface: Colors.black,
                   onBackground: Colors.black,

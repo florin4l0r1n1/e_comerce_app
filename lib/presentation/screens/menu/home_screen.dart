@@ -15,20 +15,18 @@ class HomeScreen extends StatelessWidget {
   Widget _buildBody(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // ignore: prefer_const_constructors
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: CustomAppBar(
-            childrens: [
-              TextButton(
-                  onPressed: () => _logOut(context),
-                  child: const Text("Logout"))
-            ],
+            onPressend: () => _logOut(context),
+            text: "Log Out",
           ),
         ),
-
-        body: const Center(
-          child: Text("Home"),
+        body: Container(
+          color: Colors.grey,
+          child: const Center(
+            child: Text("GirdViewWithItems"),
+          ),
         ),
       ),
     );

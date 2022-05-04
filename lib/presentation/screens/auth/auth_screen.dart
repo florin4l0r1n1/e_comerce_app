@@ -1,9 +1,7 @@
-
 import 'package:e_comerce_app/presentation/screens/widgets/utils/elevated_auth_button.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/image_widget.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/sized_box.dart';
 import 'package:flutter/material.dart';
-
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key key}) : super(key: key);
@@ -15,7 +13,7 @@ class AuthScreen extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return Container(
-      color: Colors.orangeAccent,
+      color: Theme.of(context).colorScheme.primary,
       alignment: Alignment.center,
       child: Padding(
         padding: const EdgeInsets.all(50.0),

@@ -19,7 +19,10 @@ class AuthButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          textStyle:const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+             ),
         ),
         child: Text(text));
   }

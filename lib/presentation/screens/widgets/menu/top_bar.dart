@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
-  Text title;
-  List<Widget> childrens;
+  Function onPressend;
+  String text;
   CustomAppBar({
     Key key,
-    this.title,
-    this.childrens,
+    this.text,
+    this.onPressend,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      color: Colors.red,
+      color: Colors.white,
       child: Row(
-        children: childrens,
+        children: [
+          TextButton(
+            onPressed: onPressend,
+            child: Text(
+              text,
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+          ),
+        ],
         mainAxisAlignment: MainAxisAlignment.end,
       ),
     );

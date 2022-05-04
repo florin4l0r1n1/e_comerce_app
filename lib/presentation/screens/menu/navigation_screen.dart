@@ -10,7 +10,6 @@ import 'package:e_comerce_app/presentation/screens/menu/home_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/profile_screen.dart';
 
 class NavigationScreen extends StatefulWidget {
-  
   NavigationScreen({
     Key key,
   }) : super(key: key);
@@ -21,7 +20,6 @@ class NavigationScreen extends StatefulWidget {
 
 class _DashBoardState extends State<NavigationScreen> {
   PersistentTabController _controller;
-  
 
   @override
   void initState() {
@@ -32,8 +30,6 @@ class _DashBoardState extends State<NavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
       if (state is Loading) {
         return const Center(
@@ -48,19 +44,18 @@ class _DashBoardState extends State<NavigationScreen> {
       }
       return _buildBody(context);
     });
-    
   }
 
   Widget _buildBody(BuildContext context) {
     return PersistentTabView(
-      
       context,
       controller: _controller,
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
-      backgroundColor:
-          Theme.of(context).colorScheme.onSurface, // Default is Colors.white.
+      backgroundColor: Theme.of(context)
+          .colorScheme
+          .primaryVariant, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset:
           true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
@@ -85,7 +80,7 @@ class _DashBoardState extends State<NavigationScreen> {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle:
-          NavBarStyle.style3, // Choose the nav bar style with this property.
+          NavBarStyle.style13, // Choose the nav bar style with this property.
     );
   }
 
@@ -94,32 +89,32 @@ class _DashBoardState extends State<NavigationScreen> {
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.home_max_outlined),
         title: ("Home"),
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: Theme.of(context).colorScheme.onPrimary,
+        activeColorPrimary: Theme.of(context).colorScheme.onBackground,
+        inactiveColorPrimary: Theme.of(context).colorScheme.onBackground,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.preview),
         title: ("Cart"),
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: Theme.of(context).colorScheme.onPrimary,
+        activeColorPrimary: Theme.of(context).colorScheme.onBackground,
+        inactiveColorPrimary: Theme.of(context).colorScheme.onBackground,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.add_box_rounded),
         title: ("Add"),
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: Theme.of(context).colorScheme.onPrimary,
+        activeColorPrimary: Theme.of(context).colorScheme.onBackground,
+        inactiveColorPrimary: Theme.of(context).colorScheme.onBackground,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.favorite_border_outlined),
         title: ("Favorite"),
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: Theme.of(context).colorScheme.onPrimary,
+        activeColorPrimary: Theme.of(context).colorScheme.onBackground,
+        inactiveColorPrimary: Theme.of(context).colorScheme.onBackground,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.portrait_outlined),
         title: ("Profile"),
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: Theme.of(context).colorScheme.onPrimary,
+        activeColorPrimary: Theme.of(context).colorScheme.onBackground,
+        inactiveColorPrimary: Theme.of(context).colorScheme.onBackground,
       ),
     ];
   }
@@ -133,6 +128,4 @@ class _DashBoardState extends State<NavigationScreen> {
       const ProfileScreen(),
     ];
   }
-
- 
 }
