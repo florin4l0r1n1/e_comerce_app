@@ -25,3 +25,4 @@ class AuthRepository {
     return await _userAuth.getUser();
   }
 }
+ 

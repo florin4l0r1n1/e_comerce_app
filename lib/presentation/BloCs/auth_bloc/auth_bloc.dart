@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_comerce_app/data/repository/repository.dart';
+import 'package:e_comerce_app/data/repository/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 part 'auth_event.dart';
