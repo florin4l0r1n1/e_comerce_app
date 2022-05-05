@@ -13,6 +13,17 @@ class Item {
       @required this.pictureUrl,
       this.price});
 
+  Map<String, Object> toJson() {
+    return {
+      'name': name,
+      'description': description,
+      'pictureUrl': pictureUrl,
+      'proce': price
+    };
+  }
+
+  
+
   Map<String, dynamic> toMap() {
     return {
       'name': name,
