@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
-  Function onPressend;
+  VoidCallback onPressend;
   String text;
+
   CustomAppBar({
     Key key,
     this.text,

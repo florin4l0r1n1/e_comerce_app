@@ -6,12 +6,16 @@ class FavoriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _buildBody(context);
+  }
+
+  Widget _buildBody(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: CustomAppBar(
-            onPressend: () {},
+            onPressend: () => _favorite(),
             text: "Favorite",
           ),
         ),
@@ -22,4 +26,6 @@ class FavoriteScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _favorite() => print('favorite');
 }

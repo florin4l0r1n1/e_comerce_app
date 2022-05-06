@@ -6,12 +6,16 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _buildBody(context);
+  }
+
+  Widget _buildBody(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: CustomAppBar(
-            onPressend: () {},
+            onPressend: () => _profile(),
             text: "Profile",
           ),
         ),
@@ -22,4 +26,6 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _profile() => print('Profile');
 }
