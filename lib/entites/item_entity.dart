@@ -31,6 +31,11 @@ class ItemEntity extends Equatable {
       snap.data()['price'],
     );
   }
+  ItemEntity.fromDocumentSnapshot(Map<String, dynamic> snap)
+      : name = snap["name"],
+        description = snap["description"],
+        pictureUrl = snap["pictureUrl"],
+        price = snap["price"];
 
   Map<String, Object> toDocument() {
     return {

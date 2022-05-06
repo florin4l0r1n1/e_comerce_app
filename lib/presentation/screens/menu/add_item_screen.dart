@@ -6,27 +6,32 @@ class AddItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _buildBody(context);
+  }
+
+  Widget _buildBody(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: CustomAppBar(
-            onPressend: _addItem(context),
+            onPressend: () => _addItem(context),
             text: "AddItem",
           ),
         ),
         body: Container(
           color: Colors.grey,
-          child:const Center(
+          child: const Center(
             child: Text(
               "Add",
-             ),
             ),
           ),
         ),
-      
+      ),
     );
   }
 
-  _addItem(BuildContext context) {}
+  void _addItem(BuildContext context) {
+    print("Add");
+  }
 }

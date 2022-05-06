@@ -6,6 +6,10 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _buildBody(context);
+  }
+
+  Widget _buildBody(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
@@ -23,5 +27,7 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  _buyItems() {}
+  void _buyItems() {
+    print('Buy');
+  }
 }
