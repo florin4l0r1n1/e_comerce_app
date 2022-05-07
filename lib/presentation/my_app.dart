@@ -1,5 +1,7 @@
 import 'package:e_comerce_app/data/repository/auth_repository.dart';
+import 'package:e_comerce_app/data/repository/item_repository.dart';
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
+import 'package:e_comerce_app/presentation/BloCs/item_bloc/bloc/item_bloc.dart';
 import 'package:e_comerce_app/presentation/screens/auth/auth_screen.dart';
 import 'package:e_comerce_app/presentation/screens/auth/register_screen.dart';
 import 'package:e_comerce_app/presentation/screens/menu/cart_screen.dart';
@@ -17,10 +19,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: (context) => AuthRepository(),
-      child: BlocProvider(
-        create: (context) => AuthBloc(
-          authRepository: RepositoryProvider.of<AuthRepository>(context),
-        ),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AuthBloc(
+              authRepository: RepositoryProvider.of<AuthRepository>(context),
+            ),
+          ),
+          BlocProvider(
+              create: (context) => ItemBloc(
+                  itemRepository:
+                      RepositoryProvider.of<ItemRepository>(context))),
+        ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
