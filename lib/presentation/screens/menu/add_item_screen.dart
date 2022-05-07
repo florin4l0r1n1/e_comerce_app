@@ -20,10 +20,30 @@ class AddItem extends StatelessWidget {
           ),
         ),
         body: Container(
-          color: Colors.grey,
-          child: const Center(
-            child: Text(
-              "Add",
+          padding: const EdgeInsets.all(20),
+          color: Colors.white,
+          child: Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            elevation: 10,
+            color: Colors.green,
+            child: Column(
+              children: const [
+                SizedBox(),
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(hintText: ' Title'),
+                  ),
+                ),
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(hintText: ' Description'),
+                  ),
+                ),
+                Expanded(
+                  child: Text('Image'),
+                ),
+              ],
             ),
           ),
         ),
