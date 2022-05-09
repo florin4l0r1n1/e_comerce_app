@@ -19,7 +19,7 @@ class FirebaseItemRepository implements ItemRepository {
 
   @override
   Future<void> deleteItem(Item item) {
-    return itemColection.doc(item.name).delete();
+    return itemColection.doc(item.title).delete();
   }
 
   @override
@@ -34,7 +34,7 @@ class FirebaseItemRepository implements ItemRepository {
   @override
   Future<void> updateIte(Item update) {
     return itemColection
-        .doc(update.name)
+        .doc(update.title)
         .update(update.toEntity().toDocument());
   }
 }

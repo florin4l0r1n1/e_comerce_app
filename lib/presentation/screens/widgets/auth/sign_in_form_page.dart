@@ -55,7 +55,7 @@ class _SignInFormPageState extends State<SignInFormPage>
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.primary,
             child: Form(
               key: _formKey,
               child: Column(
