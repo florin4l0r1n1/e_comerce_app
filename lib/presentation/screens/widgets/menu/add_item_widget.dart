@@ -1,3 +1,5 @@
+import 'package:e_comerce_app/data/repository/item_repository.dart';
+import 'package:e_comerce_app/data/services/firebase_service.dart';
 import 'package:e_comerce_app/models/item_model.dart';
 import 'package:e_comerce_app/presentation/BloCs/item_bloc/bloc/item_bloc.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/menu/item_validator__mixin.dart';
@@ -8,9 +10,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
   const AddItemWidget({Key key}) : super(key: key);
 
+  //convert to statefull widget to update the text live
   @override
   Widget build(BuildContext context) {
-    Item item;
+    return _buildBody(context);
+  }
+
+  Widget _buildBody(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return SingleChildScrollView(
       child: Container(
@@ -29,24 +35,14 @@ class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormField(
-                        validator: (title) {
-                          if (isTitleValid(title)) {
-                            item = Item(
-                                title: title, description: "", pictureUrl: "");
-                          }
-                        },
+                        validator: (title) {},
                         labelText: 'Title',
                         hintText: 'ItemName')),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomTextFormField(
                       validator: (description) {
-                        if (isDescriptionValid(description)) {
-                          item = Item(
-                              title: "",
-                              description: description,
-                              pictureUrl: "");
-                        }
+                        if (isDescriptionValid(description)) {}
                       },
                       labelText: 'Description',
                       hintText: 'hintText'),
@@ -56,12 +52,7 @@ class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
                   child: Expanded(
                       child: CustomTextFormField(
                           validator: (image) {
-                            if (isImageValid(image)) {
-                              item = Item(
-                                  title: "",
-                                  description: '',
-                                  pictureUrl: 'ImageFromCamera or galery');
-                            }
+                            if (isImageValid(image)) {}
                           },
                           labelText: 'Image',
                           hintText: "Image")),
@@ -78,7 +69,7 @@ class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          _addItem(context, item);
+                          _addItem(context, "i", "t", "e", 3);
                         },
                         child: const Text('Gallery'),
                       ),
@@ -94,6 +85,17 @@ class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
   }
 }
 
-void _addItem(BuildContext context, Item items) {
-  BlocProvider.of<ItemBloc>(context).add(AddItemRequested(items));
+void _addItem(BuildContext context, String title, String description,
+    String pictureUrl, double price) {
+  Item itr = Item(
+      title: title,
+      description: description,
+      pictureUrl: pictureUrl,
+      price: price);
+  print(itr.toString());
+  try {
+    BlocProvider.of<ItemBloc>(context).add(AddItemRequested(itr));
+  } catch (e) {
+    print(e.toString());
+  }
 }

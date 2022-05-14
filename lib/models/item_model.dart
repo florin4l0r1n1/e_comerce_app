@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:e_comerce_app/entites/item_entity.dart';
 
 class Item {
@@ -7,15 +7,15 @@ class Item {
   final String pictureUrl;
   final double price;
 
-  Item({this.title, this.description, this.pictureUrl, this.price});
+  Item({this.title ="", this.description="", this.pictureUrl="", this.price = 0});
 
   Item copyWith(
       {String title, String description, String pictureUrl, double price}) {
     return Item(
-        title: this.title,
-        description: this.description,
-        pictureUrl: this.pictureUrl,
-        price: this.price);
+        title: title ?? this.title,
+        description:description?? this.description,
+        pictureUrl:pictureUrl ?? this.pictureUrl,
+        price:price?? this.price);
   }
 
   @override
