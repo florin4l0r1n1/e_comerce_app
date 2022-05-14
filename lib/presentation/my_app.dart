@@ -17,8 +17,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => AuthRepository(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<AuthRepository>(
+            create: (context) => AuthRepository()),
+        RepositoryProvider<ItemRepository>(
+            create: (context) => ItemRepository()),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -27,9 +32,11 @@ class MyApp extends StatelessWidget {
             ),
           ),
           BlocProvider(
-              create: (context) => ItemBloc(
-                  itemRepository:
-                      RepositoryProvider.of<ItemRepository>(context))),
+            create: (context) => ItemBloc(
+              firebaseItemRepository:
+                  RepositoryProvider.of<ItemRepository>(context),
+            ),
+          ),
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

@@ -1,4 +1,5 @@
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
+import 'package:e_comerce_app/presentation/BloCs/item_bloc/bloc/item_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -123,7 +124,7 @@ class _DashBoardState extends State<NavigationScreen> {
     return [
       HomeScreen(),
       const CartScreen(),
-      const AddItem(),
+       AddItem(),
       const FavoriteScreen(),
       const ProfileScreen(),
     ];

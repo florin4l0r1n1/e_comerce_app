@@ -7,14 +7,14 @@ part 'item_bloc_event.dart';
 part 'item_bloc_state.dart';
 
 class ItemBloc extends Bloc<ItemBlocEvent, ItemBlocState> {
-  final ItemRepository itemRepository;
+  final ItemRepository firebaseItemRepository;
 
-  ItemBloc({this.itemRepository}) : super(ItemBlocInitial()) {
+  ItemBloc({this.firebaseItemRepository}) : super(ItemBlocInitial()) {
     on<AddItemRequested>((event, emit) async {
       emit(ItemLoading());
 
       try {
-        await itemRepository.addItem(event.item);
+        await firebaseItemRepository.addItem(event.item);
         emit(ItemAdded());
       } catch (e) {
         emit(ItemError(e.toString()));
@@ -23,7 +23,7 @@ class ItemBloc extends Bloc<ItemBlocEvent, ItemBlocState> {
 
     on<EditItemRequested>((event, emit) async {
       try {
-        await itemRepository.updateIte(event.item);
+        await firebaseItemRepository.updateIte(event.item);
         emit(ItemUpdated());
       } catch (e) {
         emit(ItemError(e.toString()));
@@ -32,7 +32,7 @@ class ItemBloc extends Bloc<ItemBlocEvent, ItemBlocState> {
 
     on<DeleteItemRequested>((event, emit) async {
       try {
-        await itemRepository.deleteItem(event.item);
+        await firebaseItemRepository.deleteItem(event.item);
         emit(ItemDeleted());
       } catch (e) {
         emit(ItemError(e.toString()));

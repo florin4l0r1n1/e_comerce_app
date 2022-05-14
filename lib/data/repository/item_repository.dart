@@ -1,40 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_comerce_app/entites/item_entity.dart';
+import 'package:e_comerce_app/data/services/firebase_service.dart';
 import 'package:e_comerce_app/models/item_model.dart';
 
-abstract class ItemRepository {
-  Future<void> addItem(Item item);
-  Future<void> deleteItem(Item item);
-  Future<void> updateIte(Item item);
-  Stream<List<Item>> items();
-}
+class ItemRepository {
+  final _firebaseService = FirebaseService();
 
-class FirebaseItemRepository implements ItemRepository {
-  final itemColection = FirebaseFirestore.instance.collection("items");
+  Future<void> addItem(Item item) => _firebaseService.addItem(item);
 
-  @override
-  Future<void> addItem(Item item) {
-    return itemColection.add(item.toEntity().toDocument());
-  }
+  Future<void> deleteItem(Item item) => _firebaseService.deleteItem(item);
 
-  @override
-  Future<void> deleteItem(Item item) {
-    return itemColection.doc(item.title).delete();
-  }
+  Stream<List<Item>> items() => _firebaseService.items();
 
-  @override
-  Stream<List<Item>> items() {
-    return itemColection.snapshots().map((snapshot) {
-      return snapshot.docs
-          .map((doc) => Item.fromEntity(ItemEntity.fromSnapshot(doc)))
-          .toList();
-    });
-  }
-
-  @override
-  Future<void> updateIte(Item update) {
-    return itemColection
-        .doc(update.title)
-        .update(update.toEntity().toDocument());
-  }
+  Future<void> updateIte(Item item) => _firebaseService.updateIte(item);
 }

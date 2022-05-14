@@ -8,18 +8,18 @@ abstract class ItemBlocEvent extends Equatable {
 }
 
 class AddItemRequested extends ItemBlocEvent {
-  final Item item;
-  AddItemRequested(this.item);
+final Item item;
+ const AddItemRequested(this.item);
 }
 
 class EditItemRequested extends ItemBlocEvent {
   final Item item;
-  EditItemRequested(this.item);
+ const  EditItemRequested(this.item);
 }
 
 class DeleteItemRequested extends ItemBlocEvent {
   final Item item;
-  DeleteItemRequested(this.item);
+  const DeleteItemRequested(this.item);
 }
  class RetrieveItemRequested extends ItemBlocEvent{
 
