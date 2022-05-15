@@ -66,6 +66,7 @@ class _SignInFormPageState extends State<SignInFormPage>
                   ),
                   sizedBox(),
                   CustomTextFormField(
+                    obscureText: false,
                     validator: (email) {
                       if (isEmailValid(email)) {
                         email1 = email;
@@ -79,6 +80,7 @@ class _SignInFormPageState extends State<SignInFormPage>
                   ),
                   sizedBox(),
                   CustomTextFormField(
+                    obscureText: true,
                     validator: (password) {
                       if (isPassword1Valid(password)) {
                         password1 = password;
@@ -106,11 +108,15 @@ class _SignInFormPageState extends State<SignInFormPage>
                   ),
                   sizedBox(),
                   TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, '/registerScreen');
-                      },
-                      child: const Text('Register'))
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, '/registerScreen');
+                    },
+                    child: Text('Register',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontSize: 15)),
+                  )
                 ],
               ),
             ),

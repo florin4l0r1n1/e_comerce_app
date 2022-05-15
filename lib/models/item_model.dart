@@ -2,7 +2,7 @@
 import 'package:e_comerce_app/entites/item_entity.dart';
 
 class Item {
-  final String title;
+   String title;
   final String description;
   final String pictureUrl;
   final double price;
