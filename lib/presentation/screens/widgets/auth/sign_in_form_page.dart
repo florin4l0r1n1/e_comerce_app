@@ -1,5 +1,4 @@
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
-
 import 'package:e_comerce_app/presentation/screens/widgets/auth/input_validation_mixin.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/elevated_auth_button.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/profile_text.dart';
@@ -66,6 +65,7 @@ class _SignInFormPageState extends State<SignInFormPage>
                   ),
                   sizedBox(),
                   CustomTextFormField(
+                    obscureText: false,
                     validator: (email) {
                       if (isEmailValid(email)) {
                         email1 = email;
@@ -79,6 +79,7 @@ class _SignInFormPageState extends State<SignInFormPage>
                   ),
                   sizedBox(),
                   CustomTextFormField(
+                    obscureText: true,
                     validator: (password) {
                       if (isPassword1Valid(password)) {
                         password1 = password;
@@ -106,11 +107,15 @@ class _SignInFormPageState extends State<SignInFormPage>
                   ),
                   sizedBox(),
                   TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, '/registerScreen');
-                      },
-                      child: const Text('Register'))
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, '/registerScreen');
+                    },
+                    child: Text('Register',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontSize: 15)),
+                  )
                 ],
               ),
             ),

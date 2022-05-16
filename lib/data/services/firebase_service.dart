@@ -11,7 +11,6 @@ abstract class IFirebaseService {
 }
 
 class FirebaseService implements IFirebaseService {
-  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final itemColection = FirebaseFirestore.instance.collection('items');
   @override
   Future<void> addItem(Item item) async {

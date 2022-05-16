@@ -8,8 +8,10 @@ class CustomTextFormField extends StatelessWidget {
   String errorText;
   String labelText;
   String hintText;
+  bool obscureText;
   CustomTextFormField({
     Key key,
+    this.obscureText,
     this.validator,
     this.errorText,
     this.onChanged,
@@ -21,6 +23,7 @@ class CustomTextFormField extends StatelessWidget {
     return Card(
       color: Colors.white,
       child: TextFormField(
+          obscureText: obscureText,
           validator: validator,
           onChanged: onChanged,
           style: const TextStyle(color: Colors.black),

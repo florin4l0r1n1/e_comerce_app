@@ -67,6 +67,7 @@ class _SignUpFormPageState extends State<SignUpFormPage>
                   ),
                   sizedBox(),
                   CustomTextFormField(
+                    obscureText: false,
                     validator: (email) {
                       email1 = email;
                       if (isEmailValid(email)) {
@@ -80,6 +81,7 @@ class _SignUpFormPageState extends State<SignUpFormPage>
                   ),
                   sizedBox(),
                   CustomTextFormField(
+                    obscureText: true,
                     validator: (password) {
                       password1 = password;
                       if (isPassword1Valid(password1)) {
@@ -93,6 +95,7 @@ class _SignUpFormPageState extends State<SignUpFormPage>
                   ),
                   sizedBox(),
                   CustomTextFormField(
+                    obscureText: true,
                     validator: (password) {
                       password2 = password;
                       if (isPassword2Valid(password2)) {
@@ -126,8 +129,13 @@ class _SignUpFormPageState extends State<SignUpFormPage>
                       print("register");
                       Navigator.pushReplacementNamed(context, '/signInScreen');
                     },
-                    child: const Text("Already an account"),
-                  )
+                    child: Text(
+                      "Already an account",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontSize: 15),
+                    ),
+                  ),
                 ],
               ),
             ),
