@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
-  
   AddItemWidget({Key key}) : super(key: key);
 
   @override
@@ -16,8 +15,12 @@ class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
   }
 
   Widget _buildBody(BuildContext context) {
-    Item item;
+    String title;
+    String image;
+    String description;
+    double price;
     final _formKey = GlobalKey<FormState>();
+
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(20),
@@ -35,11 +38,8 @@ class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormField(
-                        onChanged: (val) {
-                          item.title = val;
-                        },
                         obscureText: false,
-                        validator: (tit) {},
+                        validator: (title) {},
                         labelText: 'Title',
                         hintText: 'ItemName')),
                 Padding(
@@ -88,7 +88,13 @@ class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
     );
   }
 
-  addItem(BuildContext context, Item item) {
+  addItem(BuildContext context,
+      [String title, String description, String imageUrl, double price]) {
+    Item item = Item(
+        title: title,
+        description: "description",
+        pictureUrl: imageUrl,
+        price: price);
     print("Item Added");
     try {
       BlocProvider.of<ItemBloc>(context).add(AddItemRequested(item));

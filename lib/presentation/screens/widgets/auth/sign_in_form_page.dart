@@ -1,5 +1,4 @@
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
-
 import 'package:e_comerce_app/presentation/screens/widgets/auth/input_validation_mixin.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/elevated_auth_button.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/profile_text.dart';
