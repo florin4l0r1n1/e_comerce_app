@@ -1,5 +1,6 @@
 import 'package:e_comerce_app/data/repository/auth_repository.dart';
 import 'package:e_comerce_app/data/repository/item_repository.dart';
+import 'package:e_comerce_app/data/services/image_piker.dart';
 import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
 import 'package:e_comerce_app/presentation/BloCs/item_bloc/bloc/item_bloc.dart';
 import 'package:e_comerce_app/presentation/screens/auth/auth_screen.dart';
@@ -12,6 +13,9 @@ import 'package:e_comerce_app/presentation/screens/widgets/auth/sign_in_form_pag
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
+import 'BloCs/image_bloc/image_piker_bloc.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
 
@@ -19,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider<ImgPiker>(create: (context) => ImgPiker()),
         RepositoryProvider<AuthRepository>(
             create: (context) => AuthRepository()),
         RepositoryProvider<ItemRepository>(
@@ -26,6 +31,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (context) => ImagePikerBloc(
+              imgPiker: RepositoryProvider.of<ImgPiker>(context),
+            ),
+          ),
           BlocProvider(
             create: (context) => AuthBloc(
               authRepository: RepositoryProvider.of<AuthRepository>(context),
