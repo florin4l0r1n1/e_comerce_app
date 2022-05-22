@@ -1,10 +1,12 @@
 import 'package:e_comerce_app/models/item_model.dart';
+import 'package:e_comerce_app/presentation/BloCs/image_bloc/image_piker_bloc.dart';
 import 'package:e_comerce_app/presentation/BloCs/item_bloc/bloc/item_bloc.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/menu/item_validator__mixin.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/menu/top_bar.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:images_picker/images_picker.dart';
 
 class AddItem extends StatelessWidget with ItemValidatorMixin {
   AddItem({
@@ -19,7 +21,18 @@ class AddItem extends StatelessWidget with ItemValidatorMixin {
 
   @override
   Widget build(BuildContext context) {
-    return _buildBody(context);
+    return BlocBuilder<ImagePikerBloc, ImagePikerState>(
+      builder: (context, state) {
+        if (state is OnPiked) {
+          _cont(context);
+        }
+        if (state is OnImagePiked) {
+          _buildBody(context);
+        }
+
+        return _buildBody(context);
+      },
+    );
   }
 
   Widget _buildBody(BuildContext context) {
@@ -103,7 +116,11 @@ class AddItem extends StatelessWidget with ItemValidatorMixin {
                             child: const Text('Camera'),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              print("Gellery");
+                              List<Media> res = await ImagesPicker.pick(
+                                  count: 3, pickType: PickType.image);
+                            },
                             child: const Text('Gallery'),
                           ),
                         ],
@@ -116,6 +133,12 @@ class AddItem extends StatelessWidget with ItemValidatorMixin {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _cont(BuildContext buildContext) {
+    return Container(
+      child: Text("ImgPiked"),
     );
   }
 

@@ -1,24 +1,28 @@
 import 'package:e_comerce_app/models/item_model.dart';
+import 'package:e_comerce_app/presentation/BloCs/auth_bloc/auth_bloc.dart';
+import 'package:e_comerce_app/presentation/BloCs/image_bloc/image_piker_bloc.dart';
 import 'package:e_comerce_app/presentation/BloCs/item_bloc/bloc/item_bloc.dart';
-import 'package:e_comerce_app/presentation/screens/menu/add_item_screen.dart';
+
 import 'package:e_comerce_app/presentation/screens/widgets/menu/item_validator__mixin.dart';
 import 'package:e_comerce_app/presentation/screens/widgets/utils/text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:images_picker/images_picker.dart';
 
-class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
+class AddItemWidget extends StatefulWidget {
   AddItemWidget({Key key}) : super(key: key);
 
+  @override
+  State<AddItemWidget> createState() => _AddItemWidgetState();
+}
+
+class _AddItemWidgetState extends State<AddItemWidget> with ItemValidatorMixin {
   @override
   Widget build(BuildContext context) {
     return _buildBody(context);
   }
 
   Widget _buildBody(BuildContext context) {
-    String title;
-    String image;
-    String description;
-    double price;
     final _formKey = GlobalKey<FormState>();
 
     return SingleChildScrollView(
@@ -70,11 +74,15 @@ class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print("Camera");
+                        },
                         child: const Text('Camera'),
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print("gallety");
+                        },
                         child: const Text('Gallery'),
                       ),
                     ],
@@ -86,6 +94,12 @@ class AddItemWidget extends StatelessWidget with ItemValidatorMixin {
         ),
       ),
     );
+  }
+
+  Future getImage() async {
+    List<Media> res =
+        await ImagesPicker.pick(count: 3, pickType: PickType.image);
+    return res;
   }
 
   addItem(BuildContext context,

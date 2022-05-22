@@ -14,6 +14,7 @@ class ItemBloc extends Bloc<ItemBlocEvent, ItemBlocState> {
       emit(ItemLoading());
 
       try {
+        
         await firebaseItemRepository.addItem(event.item);
         emit(ItemAdded());
       } catch (e) {
