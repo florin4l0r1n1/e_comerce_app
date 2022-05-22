@@ -122,7 +122,7 @@ class _DashBoardState extends State<NavigationScreen> {
 
   List<Widget> _buildScreens() {
     return [
-      HomeScreen(),
+      const HomeScreen(),
       const CartScreen(),
        AddItem(),
       const FavoriteScreen(),
