@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:cross_file/cross_file.dart';
 import 'package:e_comerce_app/models/item_model.dart';
 import 'package:e_comerce_app/presentation/BloCs/image_bloc/image_piker_bloc.dart';
 import 'package:e_comerce_app/presentation/BloCs/item_bloc/bloc/item_bloc.dart';
@@ -7,6 +10,7 @@ import 'package:e_comerce_app/presentation/screens/widgets/utils/text_form_field
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:images_picker/images_picker.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddItem extends StatelessWidget with ItemValidatorMixin {
   AddItem({
@@ -36,6 +40,9 @@ class AddItem extends StatelessWidget with ItemValidatorMixin {
   }
 
   Widget _buildBody(BuildContext context) {
+    final ImagePicker _picker = ImagePicker();
+    List<File> image;
+
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
@@ -93,17 +100,24 @@ class AddItem extends StatelessWidget with ItemValidatorMixin {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: CustomTextFormField(
-                          obscureText: false,
-                          validator: (image) {
-                            if (isImageValid(image)) {
-                              image1 = image;
-                            } else {
-                              "Please select an image";
-                            }
+                      child: Container(
+                        child: ListView.builder(
+                          itemBuilder: (BuildContext ctx, int index) {
+                            return Padding(
+                              padding: EdgeInsets.all(5),
+                              child: Card(
+                                elevation: 20,
+                                color: Colors.black,
+                                child: Column(
+                                  children: <Widget>[
+                                    Image.file((image[index]))
+                                  ],
+                                ),
+                              ),
+                            );
                           },
-                          labelText: 'Image',
-                          hintText: "Image"),
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 200),
                     Padding(
@@ -112,14 +126,19 @@ class AddItem extends StatelessWidget with ItemValidatorMixin {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              print("Camera");
+                              image = (await _picker.getImage(
+                                  source: ImageSource.camera)) as List<File>;
+                            },
                             child: const Text('Camera'),
                           ),
                           ElevatedButton(
                             onPressed: () async {
                               print("Gellery");
-                              List<Media> res = await ImagesPicker.pick(
-                                  count: 3, pickType: PickType.image);
+
+                              image = (await _picker.getImage(
+                                  source: ImageSource.gallery)) as List<File>;
                             },
                             child: const Text('Gallery'),
                           ),
